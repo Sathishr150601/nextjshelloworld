@@ -1,5 +1,10 @@
-on: push
+on: 
+  push:
+    branches:
+    - dev
+    
 name: TestRepo
+
 jobs:
   web-deploy:
     name: Deploy
@@ -7,6 +12,12 @@ jobs:
     steps:
     - name: get latest code
       uses: actions/checkout@v3
+
+    -name: install npm packages
+     run: npm install
+
+    -name: build project
+     run: npm run build
 
     - name: sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
